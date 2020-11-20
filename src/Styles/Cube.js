@@ -1,6 +1,10 @@
 import {  useRef } from 'react'
 import { useFrame } from 'react-three-fiber'
 
+import { FontLoader } from 'three'
+
+import Roboto from '../assets/Roboto_Bold.json'
+
 // const loader = new THREE.FontLoader();
 
 // loader.load( 'fonts/helvetiker_regular.typeface.json', function ( font ) {
@@ -21,6 +25,14 @@ import { useFrame } from 'react-three-fiber'
 const Cube = (props) => {
     const mesh = useRef()
     const text = useRef()
+
+    const font = new FontLoader().parse(Roboto);
+
+    const textOptions = {
+        font,
+        size: 0.5,
+        height: 1
+    };
   
     // Rotate mesh every frame, this is outside of React without overhead
     useFrame(() => {
@@ -34,7 +46,7 @@ const Cube = (props) => {
                 {...props}
                 rotation={[0, 0, 0]}
             >
-                <textBufferGeometry />
+                <textGeometry attach="geometry" args={[`${props.index}`, textOptions]} />
                 <meshStandardMaterial color={props.color} />
             </mesh>
             <mesh

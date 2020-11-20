@@ -65,6 +65,7 @@ function App() {
           <pointLight position={[10, 10, 10]} />
           {cubes.map((cube, position) => <Cube 
             key={cube.id}
+            index={cube.id}
             animated={cube.animated}
             position={[
               -4 + 2* (position % 5), 
